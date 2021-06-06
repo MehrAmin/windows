@@ -1,0 +1,12 @@
+---
+- include_tasks: optimize.yml
+- include_tasks: timezone.yml
+- include_tasks: hostname.yml
+- include_tasks: firewall.yml
+- include_tasks: create_user.yml
+- include_tasks: networkmode.yml
+- include_tasks: change_pass.yml
+- include_tasks: reboot.yml
+- include_tasks: wsus.yml
+- include_tasks: update.yml
+- include_tasks: shutdown.yml

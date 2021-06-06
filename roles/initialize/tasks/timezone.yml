@@ -1,0 +1,13 @@
+---
+- name: Set timezone
+  win_timezone:
+    timezone: "{{ timezone }}"
+
+- name: Start and enable time service
+  win_service:
+    name: w32time
+    start_mode: auto
+    state: started
+
+- name: Sync time
+  win_command: w32tm /resync

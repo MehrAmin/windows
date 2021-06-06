@@ -1,0 +1,4 @@
+---
+timezone: "Iran Standard Time"
+admin_username: aminvakil
+admin_password: "{{ admin_password }}"

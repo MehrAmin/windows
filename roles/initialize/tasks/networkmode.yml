@@ -1,0 +1,3 @@
+---
+- name: Change Network type to Private
+  win_shell: Set-NetConnectionProfile -InterfaceAlias "{{ network_interface }}" -NetworkCategory Private

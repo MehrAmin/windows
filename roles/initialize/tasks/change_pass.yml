@@ -1,0 +1,5 @@
+---
+- name: Change PC password
+  win_user:
+    name: "{{ pc_username }}"
+    password: "{{ pc_password }}"
