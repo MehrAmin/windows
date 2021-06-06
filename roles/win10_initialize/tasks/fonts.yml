@@ -1,0 +1,5 @@
+---
+- name: Copy Fonts
+  win_copy:
+    src: files/Fonts
+    dest: D:\Fonts

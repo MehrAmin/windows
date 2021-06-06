@@ -1,0 +1,12 @@
+---
+- name: change region and format
+  win_region:
+    format: "{{ region_format }}"
+    location: "{{ region_location }}"
+    copy_settings: yes
+    unicode_language: "{{ region_unicode_language }}"
+  register: region_change
+
+- name: Reboot after changing format if it is needed
+  win_reboot:
+  when: region_change.restart_required
