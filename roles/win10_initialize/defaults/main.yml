@@ -3,6 +3,7 @@ timezone: Iran Standard Time
 admin_username: aminvakil
 admin_password: "{{ admin_password }}"
 kms_server: kms.microsoft.com
+network_interface: Ethernet
 region_format: fa-IR
 region_location: 116
 region_unicode_language: fa-IR
