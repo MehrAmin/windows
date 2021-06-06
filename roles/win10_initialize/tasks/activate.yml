@@ -1,0 +1,14 @@
+---
+- name: Change kms server
+  win_shell: cscript slmgr.vbs /skms {{ kms_server }}
+  args:
+    chdir: C:\Windows\System32\
+
+- name: Activate windows
+  win_shell: cscript slmgr.vbs /ato
+  args:
+    chdir: C:\Windows\System32\
+  retries: 10
+  delay: 5
+  register: activate_result
+  until: activate_result.rc == 0

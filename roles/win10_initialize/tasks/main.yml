@@ -2,6 +2,7 @@
 - include_tasks: optimize.yml
 - include_tasks: timezone.yml
 - include_tasks: hostname.yml
+- include_tasks: activate.yml
 - include_tasks: firewall.yml
 - include_tasks: create_user.yml
 - include_tasks: networkmode.yml
