@@ -6,3 +6,11 @@ kms_server: kms.microsoft.com
 region_format: fa-IR
 region_location: 116
 region_unicode_language: fa-IR
+packages:
+  - vlc
+  - whatsapp
+  - telegram
+  - winrar
+  - firefox
+  - googlechrome
+  - adobereader
