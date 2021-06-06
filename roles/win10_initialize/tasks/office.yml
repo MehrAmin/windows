@@ -1,0 +1,25 @@
+---
+- name: Check for office installation
+  ansible.windows.win_stat:
+    path: C:\Program Files\Microsoft Office
+  register: office_folder
+
+- name: Install office from its folder
+  win_shell: D:\Office\install.bat
+  args:
+    chdir: D:\Office
+  when: not office_folder.stat.exists
+
+- name: Change kms server for office
+  win_shell: cscript ospp.vbs "/sethst:{{ kms_server }}"
+  args:
+    chdir: C:\Program Files\Microsoft Office\Office16
+
+- name: Activate office
+  win_shell: cscript ospp.vbs /act
+  args:
+    chdir: C:\Program Files\Microsoft Office\Office16
+  retries: 10
+  delay: 5
+  register: activate_result
+  until: activate_result.rc == 0
