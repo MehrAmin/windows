@@ -1,0 +1,56 @@
+---
+name: CI
+'on':
+  pull_request:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 0 * * *'
+
+jobs:
+
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install test dependencies.
+        run: pip3 install yamllint ansible-lint ansible --pre
+
+      - name: Lint code.
+        run: |
+          yamllint .
+          ansible-lint roles
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: [lint]
+    name: Push to Galaxy
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the codebase.
+        uses: actions/checkout@v2
+
+      - name: Set up Python 3.
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.x'
+
+      - name: Install ansible-core.
+        run: pip3 install ansible-core --pre
+
+      - name: Push to galaxy if version has been bumped.
+        run: |
+            ansible-galaxy collection download --download-path /tmp aminvakil.windows
+            if [ "$(grep version: /tmp/requirements.yml | tr -d '[:space:]')" != "$(grep version: galaxy.yml | tr -d '[:space:]')" ]; then
+              ansible-galaxy collection build
+              ansible-galaxy collection publish aminvakil-windows-*.tar.gz --token ${{ secrets.GALAXY_API_KEY }}
+            fi
