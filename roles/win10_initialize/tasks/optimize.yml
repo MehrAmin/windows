@@ -19,3 +19,7 @@
       }
     }
     Optimize-PowershellAssemblies
+
+- name: Change power plan to high performance
+  community.windows.win_power_plan:
+    name: high performance
