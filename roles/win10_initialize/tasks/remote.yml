@@ -1,0 +1,15 @@
+---
+- name: Allow users to connect remotely by using Remote Desktop Services
+  win_regedit:
+    path: '{{ item }}'
+    name: fDenyTSConnections
+    data: 00000000
+    type: dword
+    state: present
+  register: register_remote_desktop_enabled
+  with_items:
+    - "HKLM:\\SYSTEM\\CurrentControlSet\\Control\\Terminal Server\\"
+    - "HKLM:\\SOFTWARE\\Policies\\Microsoft\\Windows NT\\Terminal Services"
+
+- name: Firewall Enable rule for Remote Desktop Services
+  win_shell: Enable-NetFirewallRule -DisplayGroup "Remote Desktop"
