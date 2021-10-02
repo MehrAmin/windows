@@ -1,0 +1,8 @@
+---
+domain_users:
+  - name: aminvakil
+    firstname: Amin
+    surname: Vakil
+    password: "123456"
+    groups:
+      - "Domain Admins"
