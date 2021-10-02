@@ -1,0 +1,4 @@
+---
+# - include_tasks: dns.yml
+- include_tasks: join.yml
+# - include_tasks: gpupdate.yml

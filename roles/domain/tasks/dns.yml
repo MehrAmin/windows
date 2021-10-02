@@ -1,0 +1,5 @@
+---
+- name: Change DNS Servers before joining domain
+  win_dns_client:
+    adapter_names: Ethernet
+    ipv4_addresses: "{{ dns_servers }}"
