@@ -40,6 +40,6 @@
     surname: "{{ item.surname }}"
     password: "{{ item.password }}"
     groups: "{{ item.groups }}"
-    password_expired: false
+    password_never_expires: false
     state: present
   loop: "{{ domain_users }}"
